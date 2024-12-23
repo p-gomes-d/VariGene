@@ -58,7 +58,7 @@ Usando os ficheiros disponibilizados da *AMOSTRA_A*:
 
   3.1 Apresente métricas de análise que possam ser relevantes em alguns passos da *pipeline*.
 
-  R.: 
+  R.: Utilizando os ficheiros disponibilizados, é relevante reunir métricas que permitam averiguar a qualidade dos ficheiros de partida e por conseguinte a qualidade da análise no geral. Analisando o alinhamento `AMOSTRA_A.bam` fornecido, é possível aferir a qualidade do mapeamento. Um total de 
 
 
 
