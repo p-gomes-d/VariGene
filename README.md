@@ -115,4 +115,7 @@ Usando os ficheiros disponibilizados da *AMOSTRA_A*:
 
   R.: O gene NTHL1 está envolvido no mecanismo de reparação do ADN, fundamental para garantir a integridade genómica celular. A mutação em causa é uma mutação de perda-de-função devido à substituição de um codão que codifica uma glutamina por um codão de terminação, levando à         sintese de uma proteína truncada e não funcional. A presença desta variante patogénica em homozigotia está associada a um risco elevado de desenvolver polipose adenomatosa e cancro colorrectal, ambas doenças hereditárias recessivas. Já portadores desta variante em heterozigotia     não ficam clinicamente afetados (1).
 
+  ### Referências
+
+  (1) Weren, R., Ligtenberg, M., Kets, C. et al. A germline homozygous mutation in the base-excision repair gene NTHL1 causes adenomatous polyposis and colorectal cancer. Nat Genet 47, 668–671 (2015). https://doi.org/10.1038/ng.3287
   
