@@ -97,7 +97,7 @@ Usando os ficheiros disponibilizados da *AMOSTRA_A*:
 
   3.2 Após a filtragem das variantes por qualidade, proponha os passos necessários para a identificação de variantes de interesse clínico.
 
-  R.: As variantes de interesse clínico são aquelas que se conhece estarem associadas a uma determinada patologia. Para identificar estas variantes no ficheiro anotado `AMOSTRA_A.anotada.vcf` basta executar o seguinte commando:
+  R.: As variantes de interesse clínico são aquelas que se conhece estar associadas a uma determinada patologia. Para identificar estas variantes no ficheiro anotado `AMOSTRA_A.anotada.vcf` basta filtrar executando o seguinte commando:
 
    ```bash
   bcftools view -H AMOSTRA_A.anotada.vcf | grep "CLASSIFICATION=Pathogenic"
