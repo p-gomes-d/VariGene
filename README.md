@@ -103,6 +103,6 @@ Usando os ficheiros disponibilizados da *AMOSTRA_A*:
   bcftools view -H AMOSTRA_A.anotada.vcf | grep "CLASSIFICATION=Pathogenic"
   ```
   
-  
+  Apenas uma variante patogénica foi identificada, no gene NTHL1.
   
       
