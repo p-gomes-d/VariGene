@@ -1,0 +1,75 @@
+Início
+
+    # Passo 1: Download_dos_dados_raw(arquivo_NGS)
+    
+    #Reconstituição do ficheiro .fq através do ficheiro .bam original
+    #(samtools versão 1.9)
+    samtools fastq ./files/AMOSTRA_A.bam > AMOSTRA_A.fq 2>&1
+    
+    
+    # Passo 2: Pre_processamento_dos_dados(dados_raw)
+    
+    #(fastp versão 0.20.1)
+    fastp -i AMOSTRA_A.fq -o AMOSTRA_A_cleaned.fq > fastp_stats.txt 2>&1
+    
+    
+    # Passo 3: Mapeamento_contra_o_genoma_humano(dados_pre_processados, genoma_referencia)
+    
+    #Descarregar o genoma humano de referência GRCh37 (hg19) GenBank Assembly GCA_000001405.1
+    #(wget versão 1.21.2)
+    wget hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/hg19.fa.gz
+    #Descompactar o genoma de referência
+    #(gzip versão 1.10)
+    gzip -d hg19.fa.gz
+    #Indexar o genoma de referência
+    #(bwa versão 0.7.17-r1188)
+    bwa index -p indexed_hg19 hg19.fa
+    #Alinhar contra o genoma de referência
+    bwa mem -M indexed_hg19 AMOSTRA_A_cleaned.fq > AMOSTRA_A.sam
+    
+    
+    # Passo 4: Conversao_sam_para_bam(output_mapeamento)
+    
+    #Converter ficheiro .sam para formato binário (.bam)
+    samtools view -Sb AMOSTRA_A.sam > AMOSTRA_A.bam
+    #Classificar o ficheiro .bam
+    samtools sort AMOSTRA_A.bam -o AMOSTRA_A_sorted.bam
+    #Indexar o ficheiro .bam classificado
+    samtools index AMOSTRA_A_sorted.bam
+    #Gerar métricas relativamente ao mapeamento
+    samtools flagstat AMOSTRA_A_sorted.bam > bwa_stats.txt
+    #Indexar novamente o genoma de referência
+    samtools faidx hg19.fa
+    
+
+    # Passo 5: Identificacao_de_variantes(ficheiro_bam, genoma_referencia)
+    #Deteção de variantes genéticas
+    samtools mpileup -uf hg19.fa AMOSTRA_A_sorted.bam | bcftools call --ploidy GRCh37 -mv -Ov -o AMOSTRA_A.vcf
+    
+    
+    # Passo 6: Filtragem_variantes_por_qualidade(ficheiro_vcf)
+    #Filtrar ficheiro .vcf mantendo apenas variantes com uma cobertura de reads superior 20 e um índice de qualidade superior a 20 (Q20)
+    #(bcftools versão 1.9)
+    bcftools filter -i 'DP>=20 && QUAL>=20' AMOSTRA_A.vcf > AMOSTRA_A_cleaned.vcf
+    
+
+    # Passo 7:  Anotacao_de_variantes(ficheiro_vcf_filtrado)
+    #Descarregar a base de dados de variantes classificadas da ClinVar
+    wget ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh37/clinvar.vcf.gz
+    #Descompactar a base de dados
+    gzip -d clinvar.vcf.gz
+    #Alterar a nomenclatura da coluna CHROM da base de dado da ClinVar de forma a ter o mesmo formato do ficheiro .vcf e permitir complatibilidade na anotação
+    cat <(awk 'NR>=1 && NR<=42 {print}' clinvar.vcf) <(awk 'NR>'$(grep -n "#CHROM" clinvar.vcf | cut -d ":" -f 1)' {print "chr" $0}' clinvar.vcf) > clinvar_withchr.vcf
+    #Compactar a base de dados ClinVar modificada
+    #(htslib versão 1.9)
+    bgzip -c clinvar_withchr.vcf > clinvar_withchr.vcf.gz
+    #Indexar a base de dados
+    bcftools index clinvar_withchr.vcf.gz
+    #Compactar o ficheiro .vcf filtrado
+    bgzip -c AMOSTRA_A_cleaned.vcf > AMOSTRA_A_cleaned.vcf.gz
+    #Indexar o ficheiro .vcf filtrado
+    bcftools index AMOSTRA_A_cleaned.vcf.gz
+    #Anotar as variantes
+    bcftools annotate -a clinvar_withchr.vcf.gz -c CHROM,POS,REF,ALT,INFO/ALLELEID,INFO/CLNDN,INFO/CLNHGVS,INFO/CLNSIG,INFO/CLNVC,INFO/GENEINFO,INFO/MC AMOSTRA_A_cleaned.vcf.gz -Ov -o AMOSTRA_A_annotated.vcf
+
+Fim
