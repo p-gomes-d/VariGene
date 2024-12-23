@@ -24,31 +24,37 @@ Para implementar o VariGene no *Docker* o utilizador deve executar as seguintes 
 ```bash
 cd /DIRETÓRIO/COM/OS/FICHEIROS
 ```
+
 Garantir que os ficheiros necessários se encontram no diretório actual
 
 ```bash
 docker build -t vari-gene .
 ```
+
 Implementa o VariGene no *Docker* com a *tag* "vari-gene"
 
 ```bash
 docker images
 ```
+
 Garantir que a imagem "vari-gene" se encontra instalada
 
 ```bash
 docker run vari-gene
 ```
+
 Inicia a análise e cria um *container* com o resultados
 
 ```bash
 docker ps -a
 ```
+
 Listar todos os *containers* que estão em execução ou não
 
 ```bash
 docker cp CONTAINER-ID:/usr/local/FICHEIRO-DE-INTERESSE .
 ```
+
 Copiar um resultado do *container* para o diretório actual
 
 
@@ -58,13 +64,36 @@ Usando os ficheiros disponibilizados da *AMOSTRA_A*:
 
   3.1 Apresente métricas de análise que possam ser relevantes em alguns passos da *pipeline*.
 
-  R.: Utilizando os ficheiros disponibilizados, é relevante reunir métricas que permitam averiguar a qualidade dos ficheiros de partida e por conseguinte a qualidade da análise no geral. Analisando o alinhamento `AMOSTRA_A.bam` fornecido, é possível aferir a qualidade do mapeamento. Executanto o seguinte comando é possível aferir o número total de reads e o número de reads mapeadas.
+  R.: Utilizando os ficheiros disponibilizados, é relevante reunir métricas que permitam averiguar a qualidade dos ficheiros de partida e por conseguinte a qualidade da análise no geral. Analisando o alinhamento `AMOSTRA_A.bam` fornecido, é possível aferir a qualidade do mapeamento.
+  Executanto o seguinte comando é possível aferir o número total de reads e o número de reads mapeadas.
+  
   ```bash
   samtools flagstat AMOSTRA_A.bam
   ```
+  
   Num total de 802979 reads 100% ficaram mapeadas.
+  
+  Para além da qualidade do mapeamento também é importante averiguar a qualidade da anotação das variantes. Para tal podemos analisar o ficheiro anotado `AMOSTRA_A.anotada.vcf` e executar o seguintes comandos:
+  
+  ```bash
+  bcftools view -H AMOSTRA_A.anotada.vcf | wc -l
+  ```
+  
+  Um total de 83 variantes foram identificadas.
 
-  3.2 
-
-
-
+  ```bash
+  bcftools view -H AMOSTRA_A.anotada.vcf | grep "CLINVARID" | wc -l
+  ```
+  
+  Das quais 80 ficaram anotadas.
+  
+  Saber quantos genes foram identificadas variantes e quantas variantes existem por gene pode ser útil e pode ser executado com o seguinte comando:
+  
+  ```bash
+  bcftools query -f "%INFO/GENE\n" AMOSTRA_A.anotada.vcf | grep -v "^.$" | cut -d ":" -f 1 | uniq -c
+  ```
+  
+  Foram encontrados 23 genes com variantes, sendo que o gene com o maior número de variantes identificadas foi o APC, com 11 variantes.
+  
+  
+      
