@@ -43,13 +43,13 @@ Confirmar que a imagem "vari-gene" se encontra instalada
 docker run vari-gene
 ```
 
-Inicia a análise e cria um *container* com o resultados
+Inicia a análise e cria um *container* com os resultados
 
 ```bash
 docker ps -a
 ```
 
-Listar todos os *containers* que estão em execução ou não
+Listar todos os *containers* que estão ou não em execução
 
 ```bash
 docker cp CONTAINER-ID:/usr/local/FICHEIRO-DE-INTERESSE .
