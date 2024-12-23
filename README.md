@@ -104,5 +104,15 @@ Usando os ficheiros disponibilizados da *AMOSTRA_A*:
   ```
   
   Apenas uma variante patogénica foi identificada, no gene NTHL1.
+
+  3.3 Confirme a presença da variante patogénica c.244C>T p.(Gln82*) no gene NTHL1, e responda às questões:
+
+  3.3.1 Quais as suas coordenadas genómicas?
+
+  3.3.2 A variante encontra-se em homozigotia ou heterozigotia?
+
+  3.3.3 Qual a sua relevância clínica?
+
+  R.: O gene NTHL1 está envolvido no mecanismo de reparação do ADN, fundamental para garantir a integridade genómica celular. A mutação em causa é uma mutação de perda-de-função devido à substituição de um codão que codifica uma glutamina por um codão de terminação, levando à sintese de uma proteína truncada e não funcional. A presença desta variante patogénica em homozigotia está associada a um risco elevado de desenvolver polipose adenomatosa e cancro colorrectal, ambas doenças hereditárias recessivas. Já portadores desta variante em heterozigotia não ficam clinicamente afetados (1).
+
   
-      
