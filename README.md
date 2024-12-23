@@ -58,7 +58,13 @@ Usando os ficheiros disponibilizados da *AMOSTRA_A*:
 
   3.1 Apresente métricas de análise que possam ser relevantes em alguns passos da *pipeline*.
 
-  R.: Utilizando os ficheiros disponibilizados, é relevante reunir métricas que permitam averiguar a qualidade dos ficheiros de partida e por conseguinte a qualidade da análise no geral. Analisando o alinhamento `AMOSTRA_A.bam` fornecido, é possível aferir a qualidade do mapeamento. Um total de 
+  R.: Utilizando os ficheiros disponibilizados, é relevante reunir métricas que permitam averiguar a qualidade dos ficheiros de partida e por conseguinte a qualidade da análise no geral. Analisando o alinhamento `AMOSTRA_A.bam` fornecido, é possível aferir a qualidade do mapeamento. Executanto o seguinte comando é possível aferir o número total de reads e o número de reads mapeadas.
+  ```bash
+  samtools flagstat AMOSTRA_A.bam
+  ```
+  Num total de 802979 reads 100% ficaram mapeadas.
+
+  3.2 
 
 
 
