@@ -73,7 +73,7 @@ Usando os ficheiros disponibilizados da *AMOSTRA_A*:
   
   Num total de 802979 reads 100% ficaram mapeadas.
   
-  Para além da qualidade do mapeamento também é importante averiguar a qualidade da anotação das variantes. Para tal podemos analisar o ficheiro anotado `AMOSTRA_A.anotada.vcf` e executar o seguintes comandos:
+  Para além da qualidade do mapeamento também é importante averiguar a qualidade da anotação das variantes. Para tal podemos analisar o ficheiro anotado `AMOSTRA_A.anotada.vcf` e executar os seguintes comandos:
   
   ```bash
   bcftools view -H AMOSTRA_A.anotada.vcf | wc -l
