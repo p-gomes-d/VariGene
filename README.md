@@ -94,6 +94,15 @@ Usando os ficheiros disponibilizados da *AMOSTRA_A*:
   ```
   
   Foram encontrados 23 genes com variantes, sendo que o gene com o maior número de variantes identificadas foi o APC, com 11 variantes.
+
+  3.2 Após a filtragem das variantes por qualidade, proponha os passos necessários para a identificação de variantes de interesse clínico.
+
+  R.: As variantes de interesse clínico são aquelas que se conhece estarem associadas a uma determinada patologia. Para identificar estas variantes no ficheiro anotado `AMOSTRA_A.anotada.vcf` basta executar o seguinte commando:
+
+   ```bash
+  bcftools view -H AMOSTRA_A.anotada.vcf | grep "CLASSIFICATION=Pathogenic"
+  ```
+  
   
   
       
