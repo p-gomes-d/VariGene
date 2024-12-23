@@ -37,7 +37,7 @@ Implementa o VariGene no *Docker* com a *tag* "vari-gene"
 docker images
 ```
 
-Garantir que a imagem "vari-gene" se encontra instalada
+Confirmar que a imagem "vari-gene" se encontra instalada
 
 ```bash
 docker run vari-gene
