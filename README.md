@@ -54,4 +54,11 @@ Copiar um resultado do *container* para o diretório actual
 
 ## Interpretação dos resultados
 
+Usando os ficheiros disponibilizados da *AMOSTRA_A*:
+
+  3.1 Apresente métricas de análise que possam ser relevantes em alguns passos da *pipeline*.
+
+  R.: 
+
+
 
